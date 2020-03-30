@@ -1,4 +1,6 @@
 
+import di.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -11,7 +13,6 @@ import java.util.function.Consumer;
  */
 
 public class StartUI {
-
     private final Input input;
     private final ITracker tracker;
     private boolean exit;
@@ -34,8 +35,11 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
+        Context context = new Context();
+        context.reg(ConsoleInput.class);
+        ConsoleInput consoleInput = context.get(ConsoleInput.class);
 
-        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), false, System.out::println).init();
+        new StartUI(new ValidateInput(consoleInput), new Tracker(), false, System.out::println).init();
     }
 
 
