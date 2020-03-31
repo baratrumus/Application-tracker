@@ -1,6 +1,6 @@
 
 import di.Context;
-
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -35,10 +35,11 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        Context context = new Context();
-        context.reg(ConsoleInput.class);
-        ConsoleInput consoleInput = context.get(ConsoleInput.class);
-
+//        Context context = new Context();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(ConsoleInput.class);
+        context.refresh();
+        Input consoleInput = context.getBean(ConsoleInput.class);
         new StartUI(new ValidateInput(consoleInput), new Tracker(), false, System.out::println).init();
     }
 
