@@ -1,3 +1,6 @@
+package di;
+
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -7,6 +10,9 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
+
+
+@Component
 public interface Input {
 
     String ask(String question);

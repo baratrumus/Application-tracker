@@ -1,3 +1,4 @@
+package di;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +28,13 @@ public class MenuTracker {
     /**
      * Метод заполняет список.
      * 1. создание объекта внутреннего класса происходит через обращение к объекту внешнего класса
-     * MenuTracker через this
+     * di.MenuTracker через this
      * this.new
      * <p>
      * 2. ShowAll() сделан статическим классом и его объект создается через обращение к имени внешнего класса
-     * MenuTracker. уже нет.
+     * di.MenuTracker. уже нет.
      *
-     * 3. ExitProgram сделан через внешний класс
+     * 3. di.ExitProgram сделан через внешний класс
      */
     public void fillActions(StartUI ui) {
         this.actions.add(this.new AddItem(0, "Добавление новой заявки"));

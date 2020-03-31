@@ -1,3 +1,4 @@
+package di;
 
 public abstract class BaseAction implements UserAction {
     private final int key;

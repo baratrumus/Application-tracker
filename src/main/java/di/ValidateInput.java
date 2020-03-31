@@ -1,16 +1,18 @@
+package di;
+
 import java.util.List;
 
 /**
- * ValidateInput это Декоратор.  Т.е. мы имеем ссылку на родительский интерфейс Input, чтобы можно было этой ссылке
- * присваивать другую реализацию Input, а именно ConsoleInput или StubInput для теста.
- * Далее к этой реализации мы дополняем функционал ValidateInput
+ * di.ValidateInput это Декоратор.  Т.е. мы имеем ссылку на родительский интерфейс di.Input, чтобы можно было этой ссылке
+ * присваивать другую реализацию di.Input, а именно di.ConsoleInput или di.StubInput для теста.
+ * Далее к этой реализации мы дополняем функционал di.ValidateInput
  */
 
 public class ValidateInput implements Input {
 
     /**
      * Поле, содержащее источник данных
-     * мы можем в это поле передать класс ConsoleInput или StubInput
+     * мы можем в это поле передать класс di.ConsoleInput или di.StubInput
      * и к их поведению добавить поведение валидации.
      *
      */
@@ -31,7 +33,7 @@ public class ValidateInput implements Input {
         int value = -1;
         do {
             try {
-               //вызов ask того input, что был передан в конструктор ValidateInput, т.е.
+               //вызов ask того input, что был передан в конструктор di.ValidateInput, т.е.
                 // центрального кода, вокруг которого будет наше дополнение - декоратор
                 value = this.input.ask(question, range);
                 invalid = false;

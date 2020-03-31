@@ -1,6 +1,7 @@
+package di;
 
-import di.Context;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -37,10 +38,12 @@ public class StartUI {
     public static void main(String[] args) {
 //        Context context = new Context();
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(ConsoleInput.class);
+        context.scan("di");
+       // context.register(di.ConsoleInput.class);
         context.refresh();
         Input consoleInput = context.getBean(ConsoleInput.class);
-        new StartUI(new ValidateInput(consoleInput), new Tracker(), false, System.out::println).init();
+        ITracker tracker = context.getBean(Tracker.class);
+        new StartUI(new ValidateInput(consoleInput), tracker, false, System.out::println).init();
     }
 
 

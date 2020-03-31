@@ -1,4 +1,6 @@
 
+import di.StubInput;
+import di.ValidateInput;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +30,7 @@ public class ValidateInputTest {
 
     @Test
     public void whenInvalidInput() {
-        //"1" добавляем в массив чтобы успешно выйти из while в ValidateInput
+        //"1" добавляем в массив чтобы успешно выйти из while в di.ValidateInput
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[] {"invalid", "1"})
         );

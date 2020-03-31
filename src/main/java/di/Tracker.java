@@ -1,3 +1,6 @@
+package di;
+
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -9,6 +12,7 @@ import java.util.*;
  * @since 0.1
  */
 
+@Component
 public class Tracker implements ITracker {
     /**
      * Список для хранение заявок.

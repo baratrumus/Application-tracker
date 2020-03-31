@@ -1,3 +1,4 @@
+package di;
 
 public interface UserAction {
     /**
@@ -9,8 +10,8 @@ public interface UserAction {
     /**
      * Основной метод. Переходит по цепочке наследования до класса реализующего непосредственное событие,
      * например добавление элемента.
-     * @param input объект типа Input
-     * @param tracker объект типа Tracker
+     * @param input объект типа di.Input
+     * @param tracker объект типа di.Tracker
      */
     void execute(Input input, ITracker tracker);
 
