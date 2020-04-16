@@ -1,10 +1,17 @@
 package di;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * Меню - интерфейс  взаимодействия с пользователем
@@ -13,22 +20,33 @@ import java.util.function.Consumer;
  * @since 0.1
  */
 
+@Component
 public class StartUI {
+    private static final Logger LOG = LoggerFactory.getLogger(StartUI.class);
+
     private final Input input;
     private final ITracker tracker;
-    private boolean exit;
+    private Boolean exit;
+
     private final Consumer<String> output;
+
+    @Bean
+    public Consumer<String> createConsumer() {
+        return System.out::println;
+    }
+
     /**
      * Конструктор инициализирующий поля.
      * @param input ввод данных.
      * @param tracker хранилище заявок.
      * @param output   Вывод программы сделан через Consumer<String>
      */
-    public StartUI(Input input, ITracker tracker, boolean exit, Consumer<String> output) {
+
+    public StartUI(Input input, ITracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
-        this.exit = exit;
-        this.output = output;
+        this.exit = false;
+        this.output = createConsumer();
     }
 
     /**
@@ -43,7 +61,8 @@ public class StartUI {
         context.refresh();
         Input consoleInput = context.getBean(ConsoleInput.class);
         ITracker tracker = context.getBean(Tracker.class);
-        new StartUI(new ValidateInput(consoleInput), tracker, false, System.out::println).init();
+        context.getBean(StartUI.class).init();
+       // new StartUI(new ValidateInput(consoleInput), tracker, false, System.out::println).init();
     }
 
 

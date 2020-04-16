@@ -67,7 +67,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём di.StubInput с последовательностью действий
-        new StartUI(input, tracker, false, output).init();     //   создаём di.StartUI и вызываем метод init()
+        new StartUI(input, tracker,  output).init();     //   создаём di.StartUI и вызываем метод init()
         assertThat(tracker.findAll().get(0).getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 
@@ -76,7 +76,7 @@ public class StartUITest {
         //создаём di.StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
         // создаём di.StartUI и вызываем метод init()
-        new StartUI(input, tracker, false, output).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
@@ -84,21 +84,21 @@ public class StartUITest {
     @Test
     public void whenDeleteThenTrackerHasDeletedValue() {
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
-        new StartUI(input, tracker, false, output).init();
+        new StartUI(input, tracker, output).init();
         assertNull(tracker.findById(item.getId()));
     }
 
     @Test
     public void whenFindByIdThenTrackerHasThisId() {
         Input input = new StubInput(new String[]{"4", item.getId(), "6"});
-        new StartUI(input, tracker, false, output).init();
+        new StartUI(input, tracker, output).init();
         assertThat(tracker.findById(item.getId()).getId(), is(item.getId()));
     }
 
     @Test
     public void whenShowAllThenTrackerHasThisOutput() {
         Input input = new StubInput(new String[]{"1", "6"});
-        new StartUI(input, tracker, false, output).init();
+        new StartUI(input, tracker, output).init();
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -124,7 +124,7 @@ public class StartUITest {
     @Test
     public void whenFindByNameThenTrackerHasThisOutput() {
         Input input = new StubInput(new String[]{"5", "test name", "6"});
-        new StartUI(input, tracker, false, output).init();
+        new StartUI(input, tracker, output).init();
         assertThat(
                 new String(out.toByteArray()),
                 is(
